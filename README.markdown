@@ -26,6 +26,12 @@ download:all` commands. They both accept the following parameters:
 * `-d` or `--download-dir=`: the download directory. Default is `/tmp`.
   The script creates a `hilscher_pictures` directory inside of it.
 
+DEPENDENCIES
+---
+
+This app requires `wget` to be installed on your machine. If you are on
+OSX you can install it with homebrew.
+
 INSTALL
 ---
 

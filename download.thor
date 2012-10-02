@@ -1,14 +1,18 @@
 $:.unshift(File.dirname(__FILE__) + '/lib')
 require 'hilscher_downloader'
 require 'rainbow'
+require 'fileutils'
 
 class PageDownloader
   def download_page url, options={}
     force_overwrite = options[:force_overwrite]
     download_dir = options[:download_dir]
+    full_download_dir = File.join(download_dir, "hilscher_wallpapers")
+    FileUtils.mkdir_p(full_download_dir) unless Dir.exists?(full_download_dir)
+
     pictures = HilscherDownloader::Page.new(:url => url).picture_links
     pictures.each do |image_url|
-      target_path = File.join(download_dir, "hilscher_wallpapers", image_url.split('/').last)
+      target_path =  File.join(full_download_dir, image_url.split('/').last)
       if File.exist?(target_path) && (force_overwrite == false)
         puts "Skipping #{target_path}, already downloaded".color(:red)
       else
